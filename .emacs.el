@@ -12,11 +12,11 @@
     (set-frame-parameter nil 'fullscreen 'fullboth)))
 
 ;; Carbon Emacsの設定で入れられた. メニューを隠したり．
-;(custom-set-variables
- ;'(display-time-mode t)
- ;'(tool-bar-mode nil)
- ;'(transient-mark-mode t))
-;(custom-set-faces)
+(custom-set-variables
+ '(display-time-mode t)
+ '(tool-bar-mode nil)
+ '(transient-mark-mode t))
+(custom-set-faces)
 
 ;; Color
 (if window-system (progn
