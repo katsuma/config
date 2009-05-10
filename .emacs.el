@@ -78,6 +78,7 @@
   (define-key elscreen-map "\C-z" 'suspend-emacs))
 
 
+
 ;; linumを有効化
 (require 'linum)
 ;; デフォルトでONにする
@@ -101,6 +102,7 @@
 (add-hook 'text-mode-hook 'jaspace-mode)
 
 
+
 ;; ri-emacs
 (setq ri-ruby-script "ri-emacs.rb")
 (autoload 'ri "ri-ruby.el" nil t)
@@ -110,5 +112,5 @@
 ;(local-set-key "\M-g" 'ri-ruby-show-args)
 ))
 
-;; rcodetools
+;; rcodetools ＜　まだうまく動いてない
 ;(require 'anything-rcodetools)
