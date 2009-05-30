@@ -1,8 +1,8 @@
 (when (eq window-system 'mac)
   (add-hook 'window-setup-hook
    (lambda ()
-;;              (setq mac-autohide-menubar-on-maximize t)
-    (set-frame-parameter nil 'fullscreen 'fullboth)
+      (setq mac-autohide-menubar-on-maximize t)
+;;    (set-frame-parameter nil 'fullscreen 'fullboth)
     )))
 
 (defun mac-toggle-max-window ()
@@ -111,6 +111,20 @@
 (local-set-key "\M-c" 'ri-ruby-complete-symbol)
 ;(local-set-key "\M-g" 'ri-ruby-show-args)
 ))
+
+;; anything.el
+(require 'anything-config)
+(setq anything-sources (list anything-c-source-buffers
+                             anything-c-source-bookmarks
+                             anything-c-source-recentf
+                             anything-c-source-file-name-history
+                             anything-c-source-locate))
+(define-key anything-map (kbd "C-p") 'anything-previous-line)
+(define-key anything-map (kbd "C-n") 'anything-next-line)
+(define-key anything-map (kbd "C-v") 'anything-next-source)
+(define-key anything-map (kbd "M-v") 'anything-previous-source)
+(global-set-key (kbd "C-;") 'anything)
+
 
 ;; rcodetools ＜　まだうまく動いてない
 ;(require 'anything-rcodetools)
