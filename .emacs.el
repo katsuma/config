@@ -142,10 +142,11 @@
 
 
 
-;; ri-emacs
+;; anything-rcodetools.el
 ;; http://blogs.dion.ne.jp/moe_moe/archives/7481321.html 参考
-;; > gem install rcodetools
-
+;; > gem install rcodetools -v='0.8.5'
+;; > gem install fastri
+;; > copy ~/.gem/ruby/1.8/gems/rcodetools-0.8.5.0/anything-rcodetools.el ./emacs.d/elisp
 (require 'anything)
 (require 'anything-rcodetools)
 ;; Command to get all RI entries.
