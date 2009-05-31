@@ -1,0 +1,5 @@
+;; -*- mode: emacs-lisp -*-
+;; History entries used for anything adaptive display.
+(setq anything-c-adaptive-history (quote ((file ("~/.emacs.el" ("" . 1)) ("/Users/katsuma/.emacs.el" ("" . 1)) ("/Users/katsuma/Documents/tokyo-jogging-archives/
+" ("" . 1))) (buffer ("
+" ("" . 1)) ("1.rb" ("" . 1)) ("*scratch*" ("" . 1))))))

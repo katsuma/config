@@ -103,16 +103,9 @@
 
 
 
-;; ri-emacs
-(setq ri-ruby-script "ri-emacs.rb")
-(autoload 'ri "ri-ruby.el" nil t)
-(add-hook 'ruby-mode-hook (lambda ()
-(local-set-key "\M-r" 'ri)
-(local-set-key "\M-c" 'ri-ruby-complete-symbol)
-;(local-set-key "\M-g" 'ri-ruby-show-args)
-))
 
 ;; anything.el
+;; http://yamashita.dyndns.org/blog/anythingel/参考
 (require 'anything-config)
 (setq anything-sources (list anything-c-source-buffers
                              anything-c-source-bookmarks
@@ -126,5 +119,36 @@
 (global-set-key (kbd "C-;") 'anything)
 
 
-;; rcodetools ＜　まだうまく動いてない
-;(require 'anything-rcodetools)
+;; rails.el
+;; http://d.hatena.ne.jp/higepon/20061222/1166774270 参考
+(defun try-complete-abbrev (old)
+  (if (expand-abbrev) t nil))
+
+(setq hippie-expand-try-functions-list
+      '(try-complete-abbrev
+        try-complete-file-name
+        try-expand-dabbrev))
+(setq rails-use-mongrel t)
+
+(require 'rails)
+;; 対応するファイルへの切り替え(C-c C-p)
+(define-key rails-minor-mode-map "\C-c\C-p" 'rails-lib:run-primary-switch)
+;; 行き先を選べるファイル切り替え(C-c C-n)
+(define-key rails-minor-mode-map "\C-c\C-n" 'rails-lib:run-secondary-switch)
+
+(setq auto-mode-alist  (cons '("\\.rhtml$" . html-mode) auto-mode-alist))
+
+
+
+
+
+;; ri-emacs
+;; http://blogs.dion.ne.jp/moe_moe/archives/7481321.html 参考
+;; > gem install rcodetools
+
+(require 'anything)
+(require 'anything-rcodetools)
+;; Command to get all RI entries.
+(setq rct-get-all-methods-command "PAGER=cat fri -l")
+;; See docs
+(define-key anything-map "\C-e" 'anything-execute-persistent-action)
