@@ -51,14 +51,16 @@
 ;; Predefined configurations for `anything.el'
 ;;
 ;; For quick start, try `anything-for-files' to open files.
-;; 
+;;
 ;; To configure anything you should setup `anything-sources'
 ;; with specify source, like below:
 ;;
-;; (setq anything-sources
-;;       '(anything-c-source-buffers
-;;         anything-c-source-buffer-not-found
-;;         anything-c-source-file-name-history
+ (setq anything-sources
+       '(anything-c-source-buffers
+         anything-c-source-buffer-not-found
+         anything-c-source-file-name-history
+         anything-c-source-find-gs
+         anything-c-source-grep-gs))
 ;;         anything-c-source-info-pages
 ;;         anything-c-source-info-elisp
 ;;         anything-c-source-man-pages
@@ -1016,6 +1018,43 @@ The search pattern will be appended, so the
     (delayed))
   "Source for retrieving files matching the current input pattern with locate.")
 ;; (anything 'anything-c-source-locate)
+
+
+;;;; find
+(defvar anything-c-find-gs-options (if (eq system-type 'darwin)
+                                       '("findgs")
+                                     '("findgs"))
+  "A list where the `car' is the name of the locat program followed by options. The search pattern will be appended, so the\"-r\" option should be the last option.")
+
+(defvar anything-c-source-find-gs
+  '((name . "Find gs")
+    (candidates . (lambda ()
+                    (apply 'start-process "find-process" nil
+                           (append anything-c-find-gs-options
+                                   (list anything-pattern)))))
+    (type . file)
+    (requires-pattern . 3)
+    (delayed))
+  "Source for retrieving files matching the current input pattern with locate.")
+
+;;;; git grep
+(defvar anything-c-grep-gs-options (if (eq system-type 'darwin)
+                                       '("grepgs")
+                                     '("grepgs"))
+  "A list where the `car' is the name of the locat program followed by options. The search pattern will be appended, so the \"-r\" option should be the last option.")
+
+(defvar anything-c-source-grep-gs
+  '((name . "Grep gs")
+    (candidates . (lambda ()
+                    (apply 'start-process "grep-process" nil
+                           (append anything-c-grep-gs-options
+                                   (list anything-pattern)))))
+    (type . file)
+    (requires-pattern . 3)
+    (delayed))
+  "Source for retrieving files matching the current input pattern with locate.")
+
+
 
 ;;; Recentf files
 (defvar anything-c-source-recentf
@@ -2253,7 +2292,7 @@ See http://orgmode.org for the latest version.")
                                          (setq anything-c-yaoddmuse-ew-cache
                                                (gethash "EmacsWiki" yaoddmuse-pages-hash)))
                                        (yaoddmuse-update-pagename))))))
-    (action-transformer anything-c-yaoddmuse-action-transformer))) 
+    (action-transformer anything-c-yaoddmuse-action-transformer)))
 
 ;; (anything 'anything-c-source-yaoddmuse-emacswiki-edit-or-view)
 
@@ -2506,7 +2545,7 @@ removed."
 (defvar anything-c-surfraw-favorites '("google" "wikipedia"
                                        "yahoo" "translate"
                                        "codesearch" "genpkg"
-                                       "genportage" "fast" 
+                                       "genportage" "fast"
                                        "currency")
   "All elements of this list will appear first in results.")
 (defvar anything-c-surfraw-use-only-favorites nil
@@ -2560,7 +2599,7 @@ A list of search engines."
                 (setq anything-c-surfraw-elvi (anything-c-surfraw-sort-elvi
                                                anything-c-surfraw-use-only-favorites))
                 (setq anything-c-surfraw-cache
-                      (loop for i in anything-c-surfraw-elvi 
+                      (loop for i in anything-c-surfraw-elvi
                          if (car i)
                          collect (car i))))))
     (candidates . (lambda ()

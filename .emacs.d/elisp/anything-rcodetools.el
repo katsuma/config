@@ -1,5 +1,5 @@
 ;;; anything-rcodetools.el --- accurate Ruby method completion with anything
-;; $Id: anything-rcodetools.el,v 1.13 2009/04/20 16:25:37 rubikitch Exp $
+;; $Id: anything-rcodetools.el,v 1.13 2009/04/20 16:25:37 rubikitch Exp rubikitch $
 
 ;;; Copyright (c) 2007 rubikitch
 
