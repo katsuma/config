@@ -1,0 +1,1 @@
+ifconfig en1 | grep netmask | awk '{ print $2 }' | pbcopy | cat
